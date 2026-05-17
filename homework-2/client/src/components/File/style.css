@@ -1,0 +1,6 @@
+.file {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: calc(var(--depth) * 12px);
+}
