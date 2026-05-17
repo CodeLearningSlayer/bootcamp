@@ -10,10 +10,10 @@ type FolderProps = {
     level?: number;
 }
 
-export const TreeNode: FC<FolderProps> = ({ content, folderName, level = 0 }) => {
+export const Folder: FC<FolderProps> = ({ content, folderName, level = 0 }) => {
 
     const [isCurrentFolderOpen, setIsFolderOpen] = useState(false);
-
+    
     const handleFolderClick = () => {
         setIsFolderOpen((prevState) => !prevState);
     }
@@ -22,12 +22,16 @@ export const TreeNode: FC<FolderProps> = ({ content, folderName, level = 0 }) =>
         const currentLevelNodes = Object.entries(nodes);
 
         return currentLevelNodes.map(([name, node]) => {
-            if (node.type === 'folder' && isCurrentFolderOpen) {
+            if (node.type === 'folder') {
                 return (
-                    <TreeNode key={name} level={level + 1} folderName={name} content={node.children}/>
+                    <Folder 
+                        key={name} 
+                        level={level + 1} 
+                        folderName={name} 
+                        content={node.children}/>
                 )}
             
-            if (node.type === 'file' && isCurrentFolderOpen) {
+            if (node.type === 'file') {
                 return (
                     <File key={name} name={name} level={level + 1}/>
                 )
@@ -42,7 +46,7 @@ export const TreeNode: FC<FolderProps> = ({ content, folderName, level = 0 }) =>
                 {isCurrentFolderOpen ? <OpenFolderIcon/> : <FolderIcon/>}
                 {folderName}
             </div>
-            {renderTree(content)}
+            {isCurrentFolderOpen ? renderTree(content) : null}
         </div>
     )
 }
