@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { TreeNode } from './components/Folder/Folder';
+import { Folder } from './components/Folder/Folder';
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001';
 
@@ -24,7 +24,7 @@ function App() {
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', padding: 16 }}>
       <h1>File tree</h1>
-      <TreeNode content={tree.root} folderName='root'/>
+      <Folder content={tree.root} folderName='root'/>
     </main>
   );
 }
